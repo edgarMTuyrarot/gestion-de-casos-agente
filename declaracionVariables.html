@@ -1,0 +1,48 @@
+
+<script>
+    var casos = []
+    var arrayLinks = []
+    var imgs
+    var usuarioU
+    var nombreAgente 
+    var supervisor
+    var labelUsuarioNombre = document.getElementById("usuarioNombre")
+    var imagenes = document.getElementById("imagenes")
+    let cargaCompleta = 0
+    var selectMotivos = document.getElementById("motivo_caso")
+    var divContenedor = document.getElementById("contenedor")
+    var btnEnviar = document.getElementById("btnEnviar");
+    var btnLimpiar = document.getElementById("btnLimpiar")
+    var tablitaDiv = document.getElementById("tablitaDiv")
+    var spinner = `
+          <div class="d-flex align-items-center">
+            <strong>Cargando...</strong>
+            <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+            </div>
+          </div>`
+  
+    //Declaraciones para tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+  
+    //Variables globales 
+    const date = new Date()
+    var divComentario = document.getElementById("divComentario");
+    var comentarioCaja = document.getElementById("comentarioCaja")
+    var btnCopiar = document.getElementById("btnCopiar")
+    var btnGenerar = document.getElementById("btnGenerar")
+    var btnLimpiarComentario= document.getElementById("btnLimpiarComentario")
+    var nroCuenta = document.getElementById("nroCuenta")
+    var importeNoOk
+    var importeOk
+    var importe
+    var nroFactura
+    var divFinal = document.getElementById("divFinal")
+    var registroSistema
+    var diff
+    var importeFinal
+    
+   
+  </script>

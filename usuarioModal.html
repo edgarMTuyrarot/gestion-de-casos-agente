@@ -1,0 +1,50 @@
+<div class="modal fade" id="usuario" tabindex="-1"data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="usuarioLabel" aria-hidden="true">
+    <div class="modal-dialog modal-m">
+      <div class="modal-content">
+  
+        <div class="modal-body">
+          <div class="row gap-2 container">
+            <input type="text" class="form-control col" placeholder="Ingresa tu usuario U" id="usuario_u">
+            <button class="btn btn-outline-success col" id="btn_usuario" onclick="guardarU()">Guardar</button>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    function guardarU(){
+            
+            u_ingresado = document.getElementById("usuario_u").value.toUpperCase()
+            loadingModal.show()
+            usuarioModal.hide()
+            google.script.run.withSuccessHandler(function(resultado){ 
+                //console.log(resultado)
+                if(resultado.supervisor == "" || resultado.nomre == ""){
+                usuarioU =  document.getElementById("usuario_u").value
+                nombreAgente = "Agente desconocido"
+                supervisor = "Supervisor Desconocido"
+                labelUsuarioNombre.textContent =  nombreAgente
+                usuarioModal.show()
+  
+                }else{
+                usuarioU =  document.getElementById("usuario_u").value
+                nombreAgente = resultado.nombre
+                supervisor = resultado.supervisor
+                labelUsuarioNombre.textContent =  nombreAgente
+                loadingModal.hide()
+                cargarDatos()
+                google.script.run.withSuccessHandler(function(objAgente){
+                  document.getElementById("fcr").textContent = `FCR: ${objAgente.fcr}`
+                  document.getElementById("nps").textContent = `NPS: ${objAgente.nps}`
+                  document.getElementById("reten").textContent = `Retencion: ${objAgente.reten}`
+                  document.getElementById("tmo").textContent = `TMO: ${objAgente.tmo}`
+                }).metricas(nombreAgente)
+                //refresh = setInterval(function(){cargarDatos()},90000)
+                }
+  
+  
+            }).usuarioNomina(u_ingresado)
+    }
+  </script>

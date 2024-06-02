@@ -1,0 +1,76 @@
+<script>
+    function cargarDatos(){
+      var casoID = 0
+      //listaCasos.innerHTML="Cargando.."
+      listaCasos.innerHTML = spinner
+      google.script.run.withSuccessHandler(function(datos){ 
+            //tablitaDiv.innerHTML =""
+            listaCasos.innerHTML=""
+            datos.reverse()
+            datos.forEach(function(dato){
+              for(const [key, value] of Object.entries(dato)){
+                let caso = JSON.parse(value)
+
+                if(u_ingresado.toUpperCase() == caso.usuario.toUpperCase()){
+                  casos.push(caso)
+                  celdaMotivo = document.createElement("td")
+                  celdaFecha = document.createElement("td")
+                  celdaItr = document.createElement("td")
+                  celdaEstado = document.createElement("td")
+                  celdaMotivo.innerHTML = `${(caso.motivo).toUpperCase()}`
+                  celdaFecha.innerHTML=`${(caso.fecha.slice(0,11)).trim() }`
+                  celdaItr.innerHTML=`${caso.ticket}`
+                  celdaEstado.innerHTML=`${caso.estado}`
+
+                  celdaFecha.value = casoID
+                  celdaEstado.value = casoID
+                  celdaItr.value =  casoID
+
+
+                  var tr =  document.createElement("tr")  
+                  tr.appendChild(celdaMotivo)
+                  tr.appendChild(celdaFecha)
+                  tr.appendChild(celdaItr)
+                  tr.appendChild(celdaEstado)
+                  tr.style = "cursor:pointer;" 
+                  tr.value = casoID;
+                 
+                  tr.addEventListener("click",function(){
+                    document.getElementById("nro_cuenta").value = caso.nro_cuenta
+                    document.getElementById("dni").value = caso.dni ? caso.dni : "-"
+                    document.getElementById("detalles_caso").value = caso.detalles
+                    document.getElementById("nota").value = caso.nota ? caso.nota : "-"
+                    
+                    detallesModal.show()
+                  })
+                  
+                  if(caso.estado == "Pendiente"){
+                    tr.classList.add("table-warning")
+
+                  }
+                  if(caso.estado == "Cerrado"){
+                    tr.classList.add("table-success")
+
+                  }
+                  if(caso.estado == "Cancelado"){
+                    tr.classList.add("table-danger")
+
+                  }
+                  if(caso.estado == "Cargado"){
+                    tr.classList.add("table-primary")
+
+                  }
+
+                  
+
+                  casoID = casoID + 1
+
+                  listaCasos.appendChild(tr)
+                }              
+              }
+            })
+            listaCasos.classList.remove("invisible")
+        }).traerRegistros()
+
+  }
+</script>

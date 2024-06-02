@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+</head>
+
+<body>
+  <!--Inicio div Principal-->
+  <div id="divPrincipal">
+    <h4 id="usuarioNombre" class="text-center"></h4>
+    <div class="row p-3 mb-2 bg-secondary text-white text-center">
+      <h4 class="col" id="fcr"></h4>
+      <h4 class="col" id="nps"></h4>
+      <h4 class="col" id="reten"></h4>
+      <h4 class="col" id="tmo"></h4>
+    </div>
+    <hr>
+    <!--Contenedor principal -->
+    <div action="" class="row p-5">
+      <!--Contenedor del caso-->
+      <div class="col-4 ">
+        <h5 class="text-center">Pedidos para Itrackers</h5>
+        <label for="motivo">Motivo:</label>
+        <select name="motivo" id="motivo_caso" class="form-select  m-auto">
+                      <option value="default">Elegir</option>
+                      <option value="cn">Corredor Norte</option>
+                      <option value="regularizar_orden">Regularizar Orden</option>
+                      <option value="aseguramiento_cita">Aseguramiento de Cita</option>
+                      <option value="error_promocion">Promo no aparece en Fan</option>
+                      <option value="adelantamiento_cita">Adelantamiento Cita</option>
+                  </div>
+          </select>
+        <!--Contenedor para cargar las plantillas de los casos -->
+        <div id="contenedor" class="invisible">
+
+
+
+        </div>
+        <span><strong>Recorda, todos los casos requieren capturas de pantalla</strong></span>
+        <div class="w-100 m-auto mt-5">
+          <button class="btn btn-outline-success mt-3 m-auto disabled" id="btnEnviar">Enviar solicitud</button>
+          <button class="btn btn-outline-info mt-3 m-auto disabled" id="btnLimpiar">Limpiar</button>
+        </div>
+      </div>
+
+      <!--Contenedor de los prints-->
+      <div id="divCapturas" class="col-4 mt-5 border border-3">
+        <span class="text-secondary text-center" placeholder="Capturas">Capturas: presionar CTRL+V</span>
+        <div id="imagenes" class="row mb-2"></div>
+      </div>
+
+      <div class="col-4 container">
+        <h3 class="text-center text-secondary">Mis casos cargados</h3>
+        <div id="tablitaDiv"></div>
+        <button class="btn btn-outline-primary mt-3 m-auto" id="btnActualizar">Actualizar Casos</button>
+        <table class="table table-sm table-dark table-hover text-center">
+          <thead>
+            <th>Motivo</th>
+            <th>Fecha</th>
+            <th>N° Itracker</th>
+            <th>Estado</th>
+          </thead>
+          <tbody id="listaCasos" class="">
+
+          </tbody>
+        </table>
+        <hr>
+      </div>
+      <hr class="mt-5">
+
+      <img src="" id="imagen" alt="">
+      <!--Botones-->
+
+    </div>
+  </div>
+
+  <hr>
+  <hr>
+ 
+
+  <!-- Modal -->
+  <!--   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-body">
+            <span>Usuario:</span>
+            <input type="text" id="usuario_u" class="form-control">
+            <span>Contraseña:</span>
+            <input type="password" id="pass" class="form-control">
+        </div>
+        <div class="modal-footer">
+          
+          <button type="button" class="btn btn-primary" id="guardarU" onclick="guardarU()">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+
+
+
+
+
+  <!--Inicio div Supervisores-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/node-uuid/1.4.7/uuid.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
+  </script>
+  <?!= include('declaracionVariables'); ?>
+  <?!= include('cargarDatos'); ?>
+  <?!= include('Modales'); ?>
+  <?!= include('templatesCasos'); ?>
+  <?!= include('scriptCapturas'); ?>
+  <?!= include('scriptsBotones'); ?>
+  <?!= include('scriptSubirADrive'); ?>
+  <?!= include('usuarioModal'); ?>
+
+  <!-- para generador de comentarios -->
+  <script>
+
+  </script>
+
+  <script>
+    //console.log('UUID v4:', uuid.v4());
+    //Declaramos el modalSpinner
+    var loadingModal = new bootstrap.Modal(document.getElementById('loading'), {
+      keyboard: false,
+    })
+    //Declaracion modal success
+    var successModal = new bootstrap.Modal(document.getElementById('success'), {
+      keyboard: false,
+    })
+    //declaracion modal usuario
+    var usuarioModal = new bootstrap.Modal(document.getElementById('usuario'), {
+      keyboard: false,
+    })
+    //declaracion detalles Modal
+    var detallesModal = new bootstrap.Modal(document.getElementById('detalles'), {
+      keyboard: false,
+
+    })
+
+    
+
+    usuarioModal.show()
+    
+    var btnActualizar = document.getElementById("btnActualizar")
+    btnActualizar.addEventListener("click",()=>{
+      cargarDatos()
+    })
+
+    //Evento al seleccionar motivo
+          selectMotivos.addEventListener("change",function(e){
+              motivo_caso = selectMotivos.value
+              if(selectMotivos.value == "regularizar_orden"){
+                  divContenedor.innerHTML = ""
+                  divContenedor.innerHTML = reguOrden
+                  divContenedor.classList.remove("invisible")
+                  btnEnviar.classList.remove("disabled")
+                  btnLimpiar.classList.remove("disabled")
+                  
+              }
+              if(selectMotivos.value == "aseguramiento_cita"){
+                  divContenedor.innerHTML = ""
+                  divContenedor.innerHTML = aseguramiento_cita
+                  divContenedor.classList.remove("invisible")
+                  btnEnviar.classList.remove("disabled")
+                  btnLimpiar.classList.remove("disabled")
+              }
+              if(selectMotivos.value == "cn"){
+                  divContenedor.innerHTML = ""
+                  divContenedor.innerHTML = cn
+                  divContenedor.classList.remove("invisible")
+                  btnEnviar.classList.remove("disabled")
+                  btnLimpiar.classList.remove("disabled")
+              }
+              if(selectMotivos.value == "error_promocion"){
+                  divContenedor.innerHTML = ""
+                  divContenedor.innerHTML = error_promocion
+                  divContenedor.classList.remove("invisible")
+                  btnEnviar.classList.remove("disabled")
+                  btnLimpiar.classList.remove("disabled")
+              }
+              if(selectMotivos.value == "adelantamiento_cita"){
+                  divContenedor.innerHTML = ""
+                  divContenedor.innerHTML = adelantamiento_cita
+                  divContenedor.classList.remove("invisible")
+                  btnEnviar.classList.remove("disabled")
+                  btnLimpiar.classList.remove("disabled")
+              }
+
+              
+              if(selectMotivos.value == "default"){
+                  divContenedor.innerHTML = ""
+                  btnEnviar.classList.add("disabled")
+                  btnLimpiar.classList.add("disabled")
+
+              }
+              
+          })
+  </script>
+
+
+</body>
+
+</html>

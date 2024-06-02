@@ -1,0 +1,163 @@
+<script>
+    btnEnviar.addEventListener("click",enviar)
+    btnLimpiar.addEventListener("click",limpiar)
+  function enviar(){
+      cargaCompleta = 0
+      arrayLinks = []
+  
+    //Inicio valiadacion de campos
+      var control = ""
+      var validacion = 0
+      var campos = document.querySelectorAll(".campo");
+      var camposArray = [];
+  
+  
+      for (index = 0; index < campos.length; ++index) {
+        if(campos[index].value ==""){
+        campos[index].classList.add("border-danger")
+        validacion--
+        }else{
+          campos[index].classList.remove("border-danger")
+          validacion++
+        }
+        if(validacion == campos.length){
+          control = "ok"
+        }
+      }
+  //Fin validacion de campos
+  
+  
+  
+  
+      if(control == "ok"){
+      loadingModal.show()
+      switch (motivo_caso){
+        case "aseguramiento_cita":
+              datos = {
+                "motivo":motivo_caso,
+                "usuario" :usuarioU,
+                "nombreAgente":nombreAgente,
+                "nro_cuenta" : document.getElementById("nro_cuenta").value,
+                "dni" :  document.getElementById("dni").value,
+                "tecnologia": document.getElementById("tecnologia").value,
+                "nro_ot": document.getElementById("nro_ot").value,
+                "base_operativa":document.getElementById("base_operativa").value,
+                "sector_operativo":document.getElementById("sector_operativo").value,
+                "telefono":document.getElementById("telefono").value,
+                "alta_service": document.getElementById("alta_service").value,
+                "detalles" : document.getElementById("detalles").value,
+                "supervisor": supervisor,
+                "nota":document.getElementById("nota").value
+              }
+              break;
+        case "regularizar_orden":
+              datos = {
+                "motivo":motivo_caso,
+                "usuario_afectado" : usuarioU,
+                "usuario" : usuarioU,
+                "nombreAgente":nombreAgente,
+                "nro_cuenta" : document.getElementById("nro_cuenta").value,
+                "nro_orden" : document.getElementById("nro_orden").value,
+                "cancelar_activar" : document.getElementById("cancelar_activar").value,
+                "funcionalidad" : document.getElementById("funcionalidad").value,
+                "afecta_servicio":document.getElementById("afecta_servicio").value,
+                "motivo_contacto": document.getElementById("cliente_motivo").value,
+                "detalles":document.getElementById("detalles").value,
+                "dni" :  document.getElementById("dni").value,
+                "supervisor": supervisor,
+                "nota":document.getElementById("nota").value
+              }
+              break;
+        case "cn":
+              datos = {
+                "motivo":motivo_caso,
+                "nombreAgente":nombreAgente,
+                "nro_cuenta" : document.getElementById("nro_cuenta").value,
+                "nro_orden" : document.getElementById("nro_orden").value,
+                "sistema" : document.getElementById("sistema").value,
+                "dni":  document.getElementById("dni").value,
+                "detalles":document.getElementById("detalles").value,
+                "telefono" : document.getElementById("telefono").value,
+                "usuario": usuarioU,
+                "supervisor": supervisor,
+                "nota":document.getElementById("nota").value
+              }
+              break;
+        case "error_promocion":
+              datos = {
+                "motivo":motivo_caso,
+                "nombreAgente":nombreAgente,
+                "u_afectado" : usuarioU,
+                "nro_cuenta" : document.getElementById("nro_cuenta").value,
+                "idPromocion":document.getElementById("id_promocion").value,
+                "detalles_incidente" : document.getElementById("detalles_incidente").value,
+                "seteo":document.getElementById("seteo").value,
+                "domicilio":document.getElementById("domicilio").value,
+                "usuario": usuarioU,
+                "supervisor": supervisor,
+                "nota":document.getElementById("nota").value,
+                "dni" :  document.getElementById("dni").value,
+              }
+              break;
+        case "adelantamiento_cita":
+              datos = {
+                "motivo":motivo_caso,
+                "nombreAgente":nombreAgente,
+                "u_afectado" : usuarioU,
+                "nro_cuenta" : document.getElementById("nro_cuenta").value,
+                "tipo_cliente":document.getElementById("tipo_cliente").value,
+                "nro_ot" : document.getElementById("nro_ot").value,
+                "detalles":document.getElementById("detalles").value,
+                "sistema": document.getElementById("sistema").value,
+                "base_operativa":document.getElementById("base_operativa").value,
+                "tecnologia": document.getElementById("tecnologia").value,
+                "sector_operativo":document.getElementById("sector_operativo").value,
+                "localidad":document.getElementById("localidad").value,
+                "dni": document.getElementById("dni").value,
+                "nro_icd":document.getElementById("nro_icd").value,
+                "tipo_ot":document.getElementById("tipo_ot").value,
+                "fecha_cita_original":document.getElementById("fecha_cita_original").value,
+                "telefono" : document.getElementById("telefono").value,
+                "reiterado":document.getElementById("reiterado").value,
+                "dispo_horaria":document.getElementById("dispo_horaria").value,
+                "usuario": usuarioU,
+                "supervisor": supervisor,
+                "nota":document.getElementById("nota").value
+              }
+        default:
+      }
+  
+      imgs = document.querySelectorAll(".obj")
+      //Se llama a la funcion para guardar registro en sheet
+  
+      //Se inicia la carga de screenshots
+      if(imgs.length>0){
+        for(let i=0;i<imgs.length;i++){
+            let name = nombreAgente+" || Cuenta:"+datos.nro_cuenta+"-"+i
+            new FileUpload (imgs[i],imgs[i].file,name);
+            
+        }
+      }else{
+            datos.links = arrayLinks
+            google.script.run.withSuccessHandler(function(){ 
+              loadingModal.hide() 
+              limpiar()
+              successModal.show()
+              cargarDatos()
+            }).guardarRegistro(datos)
+      }
+      } 
+  
+  
+  
+  
+  }
+  
+  function limpiar(){
+    imagenes.innerHTML = ""
+    contenedor.innerHTML = ""
+    selectMotivos.selectedIndex = 0
+  }
+  
+  
+  </script>

@@ -1,0 +1,158 @@
+<script>
+    //TemplatesdeCasos
+    var reguOrden =
+            `<div id="caso_Reg_orden" class="mt-1">
+  
+              <input type="text" class="form-control mb-1 campo" id="nro_cuenta" placeholder="Numero Cuenta"> 
+              <input type="text" class="form-control mb-1 campo" id="nro_orden" placeholder="Numero Orden/Caso">
+              <select class="form-select mb-1 campo" id="cancelar_activar">
+                <option value="">Opcion?</option>
+                <option>Cancelar</option>
+                <option>Activar</option>
+              </select>
+              <select class="form-select mb-1 campo" id="funcionalidad">
+                <option value="">Funcionalidad?</option>
+                <option>ABM Servicios</option>
+                <option>Baja</option>
+                <option>Cambio Plan</option>
+                <option>Conciliate</option>
+                <option>Degradacion</option>
+                <option>Fidelizacion y Retencion</option>
+                <option>Venta</option>
+              </select>
+              <select class="form-select mb-1 campo" id="afecta_servicio">
+                <option value="">Afecta Servicio?</option>
+                <option>Si</option>
+                <option>No</option>
+              </select>
+              <input type="text" class="form-control mb-1 campo"  id="dni" placeholder ="DNI">
+              <textarea id="cliente_motivo" rows="5" class="form-control mb-1 campo" placeholder="Motivo Contacto Cliente"></textarea> 
+              <textarea id="detalles" rows="5" class="form-control campo" placeholder="Detalles"></textarea>  
+              <hr>
+              <textarea id="nota" rows="5" class="form-control campo mb-1" placeholder="Nota:"></textarea> 
+  
+          </div>`
+    
+    var aseguramiento_cita = `
+              <input type="text" class="form-control mb-1 campo" id="nro_cuenta" placeholder="Numero Cuenta">
+              <input type="text" class="form-control mb-1 campo"  id="dni" placeholder ="DNI">
+              <select class="form-select mb-1 campo" id="tecnologia">
+                <option value="">Tecnologia?</option>
+                <option>HFC</option>
+                <option>FTTH</option>
+                <option>XDSL</option>
+              </select>
+              <input type="text" class="form-control mb-1 campo"  id="nro_ot" placeholder ="Numero OT ?">
+              <input type="text" class="form-control mb-1 campo"  id="base_operativa" placeholder ="Base operativa">
+              <input type="text" class="form-control mb-1 campo"  id="sector_operativo" placeholder ="Sector operativo">
+              <input type="text"  class="form-control mb-1 campo"  id="telefono" placeholder ="Telefono">
+              <input type="text"  class="form-control mb-1 campo"  id="alta_service" placeholder ="Alta/Service?">
+              <textarea id="detalles" rows="5" class="form-control campo" placeholder="Detalles"></textarea>
+              <hr>
+              <textarea id="nota" rows="5" class="form-control campo mb-1" placeholder="Nota:"></textarea>
+  
+    `
+  
+    var cn = `
+              
+              <input type="text" class="form-control mb-1 campo" id="nro_cuenta" placeholder="Numero Cuenta">
+              <input type="text" class="form-control mb-1 campo" id="nro_orden" placeholder="Numero Orden/Caso">
+              <select class="form-select mb-1 campo" id="sistema">
+                <option value="">Sistema?</option>
+                <option>Open</option>
+                <option>Fan</option>
+              </select>
+              <input type="text"  class="form-control mb-1 campo"  id="telefono" placeholder ="Telefono">
+              <input type="text" class="form-control mb-1 campo"  id="dni" placeholder ="DNI">
+              <textarea id="detalles" rows="5" class="form-control campo" placeholder="Detalles"></textarea>
+              <hr>
+              <textarea id="nota" rows="5" class="form-control campo mb-1" placeholder="Nota:"></textarea>
+    `
+  
+    var error_promocion = `
+  
+              <textarea id="detalles_incidente" rows="5" class="form-control campo mb-1 mt-1" placeholder="Detalle del Incidente"></textarea>
+              <input type="text" class="form-control mb-1 campo" id="nro_cuenta" placeholder="Numero Cuenta">
+              <textarea id="domicilio" rows="5" class="form-control campo mb-1" placeholder="Domicilio"></textarea>
+              <input type="text" class="form-control mb-1 campo" id="id_promocion" placeholder="ID Promocion">
+              <textarea id="seteo" rows="5" class="form-control campo mb-1" placeholder="Seteo Completo"></textarea>
+              <hr>
+              <p><strong>IMPORTANTE:</strong>
+                Por favor adjuntar pantallas con horario y fecha actual, sin recortar.
+                Para un correcto análisis debes cargar las siguientes pantallas, sin excepción:
+                <ul>
+                  <li>
+                      1 App
+                  </li>
+                  <li> 
+                      2 Catálogo
+                  </li>
+                  <li>
+                      3 Card del cliente
+                  </li>
+                  <li> 
+                      4 Detalle de Plan
+                  </li>
+                  <li>      
+                      5 Recomendador/Motivos</p>  
+                  </li>
+                </ul>
+              <input type="text" class="form-control mb-1 campo" id="dni" placeholder="DNI">
+              <hr>
+              <textarea id="nota" rows="5" class="form-control campo mb-1" placeholder="Nota:"></textarea>
+  
+    `
+    var adelantamiento_cita = `
+              <select class="form-select mb-1 campo" id="tipo_cliente">
+                <option value="">Tipo Cliente?</option>
+                <option>Residencial</option>
+                <option>Corporativo</option>
+                <option>FOP/VIP</option>
+                <option>Corredor Norte</option>
+              </select>
+              <select class="form-select mb-1 campo" id="sistema">
+                <option value="">Sistema?</option>
+                <option>FAN</option>
+                <option>OPEN</option>
+                <option>Siebel</option>
+              </select>
+              <input type="text" class="form-control mb-1 campo"  id="base_operativa" placeholder ="Base operativa">
+              <input type="text" class="form-control mb-1 campo"  id="localidad" placeholder ="Localidad">
+              <input type="text" class="form-control mb-1 campo"  id="nro_ot" placeholder ="Numero OT ?">
+              <select class="form-select mb-1 campo" id="tipo_ot">
+                <option value="">Tipo OT?</option>
+                <option>Instalacion</option>
+                <option>Desconexion</option>
+                <option>Reinstalacion</option>
+              </select>
+              <input type="text" class="form-control mb-1 campo" id="nro_cuenta" placeholder="Numero Cuenta">
+              <input type="text" class="form-control mb-1 campo" id="nro_icd" placeholder="N° Ticket ICD">
+              <input type="text" class="form-control mb-1 campo"  id="dni" placeholder ="DNI">
+              <input type="text" class="form-control mb-1 campo"  id="sector_operativo" placeholder ="Sector operativo">
+              <input type="text"  class="form-control mb-1 campo"  id="telefono" placeholder ="Telefono">
+              <select class="form-select mb-1 campo" id="tecnologia">
+                <option value="">Tecnologia?</option>
+                <option>HFC</option>
+                <option>FTTH</option>
+                <option>XDSL</option>
+              </select>
+              <input type="date" class="form-control mb-1 campo"  id="fecha_cita_original" placeholder ="Fecha de Cita Original">
+              <select class="form-select mb-1 campo" id="dispo_horaria">
+                <option value="">Disponibilidad Horaria?</option>
+                <option>Turno Mañana</option>
+                <option>Turno Tarde</option>
+                <option>Todo el dia</option>
+              </select>
+              <select class="form-select mb-1 campo" id="reiterado">
+                <option value="">Reiterado?</option>
+                <option>Si</option>
+                <option>No</option>
+              </select>
+              <textarea id="detalles" rows="5" class="form-control campo" placeholder="Detalles"></textarea>
+              <hr>
+              <textarea id="nota" rows="5" class="form-control campo mb-1" placeholder="Nota:"></textarea>
+  
+    `
+  
+    
+  </script>

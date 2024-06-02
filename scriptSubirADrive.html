@@ -1,0 +1,37 @@
+<script>
+    function FileUpload(img,file,nombre){
+        
+        var reader = new FileReader();
+        reader.onload = function(event){
+            //console.log(event.target.result)
+            const obj={
+                filename: nombre,
+                mimeType: file.type,
+                bytes: [...new Int8Array(event.target.result)]
+            }
+            
+            //console.log(obj)
+  
+            google.script.run.withSuccessHandler(function(e){
+                cargaCompleta=cargaCompleta+1
+                arrayLinks.push(e)
+  
+            if(cargaCompleta == imgs.length){
+              datos.links = arrayLinks
+              google.script.run.withSuccessHandler(function(){ 
+                loadingModal.hide() 
+                limpiar()
+                successModal.show()
+                cargarDatos()
+              }).guardarRegistro(datos)
+  
+            }
+            } ).subirArchivo(obj,supervisor)
+            
+            
+        }
+        reader.readAsArrayBuffer(file)
+      
+      
+    }
+  </script>

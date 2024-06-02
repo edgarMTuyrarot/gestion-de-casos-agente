@@ -1,0 +1,67 @@
+<script>
+    var blobs = []
+    var divImagenes = document.getElementById("imagenes")
+  
+    document.onpaste = function(pasteEvent) {
+        // considere el primer elemento (se puede extender fácilmente para múltiples elementos)
+        var item = pasteEvent.clipboardData.items[0];
+    
+        if (item.type.indexOf("image") === 0)
+        {
+            //Obtienes el blob de la imagen
+            var blob = item.getAsFile();
+            blobs.push(blob)
+            // Crea un lector de archivos
+            var reader = new FileReader();
+  
+            // Establece el controlador de eventos de carga
+            reader.onload = function(event) {
+                //console.log(event)
+                //Obtener la URL de datos de la imagen
+                let dataURL = event.target.result;
+    
+                // obtener la identificación del contenedor img
+              // let img = document.getElementById("imagen");
+    
+                // Establece el atributo de origen del elemento de imagen
+                const subDiv = document.createElement("div");
+                const btnBorrar = document.createElement("button")
+                const imagen = document.createElement("img");
+                subDiv.id = event.target.result;
+                subDiv.classList.add("col");
+                //se agregan clases al btn de borrar
+                btnBorrar.classList.add("btn");
+                btnBorrar.classList.add("btn-outline-danger");
+                btnBorrar.classList.add("m-auto");
+                btnBorrar.classList.add("mt-1");
+                btnBorrar.classList.add("row");
+                btnBorrar.textContent = "Borrar";
+                //se agrega el evento de borrar a cada boton
+                btnBorrar.addEventListener("click",function(){
+                  var subDivSelect = document.getElementById(event.target.result)
+                  divImagenes.removeChild(subDivSelect)
+                })
+                imagen.src = dataURL;
+                imagen.style = "max-width: 90%; margin-top: 10px;"
+                imagen.classList.add("obj")
+                imagen.classList.add("row")
+                imagen.file = blob
+                //se agrega la imagen y el boton al elemento subdiv
+                subDiv.appendChild(imagen)
+                subDiv.appendChild(btnBorrar)                 
+                //se agrega el elemento subdiv al div de imagenes
+                divImagenes.appendChild(subDiv)                      
+                
+            };
+            // Lee el blob como una URL de datos
+            reader.readAsDataURL(blob);
+        }
+  
+    }
+    
+  
+  
+  
+  
+  
+  </script>
