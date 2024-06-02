@@ -17,7 +17,7 @@ function usuarioNomina(u) {
     "nombre": "",
     "supervisor": ""
   }
-  var ss = SpreadsheetApp.openById("1J4GYq4XIRVnzqoYPo35aoN35d5RgYc5rGQcOOfl1Drw");
+  var ss = SpreadsheetApp.openById("--");
   var data = ss.getSheetByName("Nomina Cable")
   var datos = data.getDataRange().getDisplayValues()
   datos.forEach(function (fila) {
@@ -31,10 +31,10 @@ function usuarioNomina(u) {
 }
 
 function metricas(agente) {
-  var tablaTMO = SpreadsheetApp.openById("1gFkMX6D7fQM9BkPXYYvZcNcUh7XUATiPT6EpXRouEmk").getRangeByName("TMO").getValues();
-  var tablaFCR = SpreadsheetApp.openById("1gFkMX6D7fQM9BkPXYYvZcNcUh7XUATiPT6EpXRouEmk").getRangeByName("FCR").getValues();
-  var tablaNPS = SpreadsheetApp.openById("1gFkMX6D7fQM9BkPXYYvZcNcUh7XUATiPT6EpXRouEmk").getRangeByName("NPS").getValues();
-  var tablaReten = SpreadsheetApp.openById("1gFkMX6D7fQM9BkPXYYvZcNcUh7XUATiPT6EpXRouEmk").getRangeByName("Reten").getValues();
+  var tablaTMO = SpreadsheetApp.openById("--").getRangeByName("TMO").getValues();
+  var tablaFCR = SpreadsheetApp.openById("--").getRangeByName("FCR").getValues();
+  var tablaNPS = SpreadsheetApp.openById("--").getRangeByName("NPS").getValues();
+  var tablaReten = SpreadsheetApp.openById("--").getRangeByName("Reten").getValues();
   let objAgente = {
     "nombre": agente,
     "tmo":"Sin Datos",
@@ -94,7 +94,7 @@ function subirArchivo(obj, sup) {
 }
 
 function identificarCarpeta(nombre) {
-  var carpetaRaiz = DriveApp.getFolderById("1c0eOUSWL0v2uIoqiSsaqfcoaZ9sOpI5F")
+  var carpetaRaiz = DriveApp.getFolderById("--")
   var carpeta = carpetaRaiz.getFoldersByName(nombre)
   var idCarpeta
   while (carpeta.hasNext()) {
@@ -112,7 +112,7 @@ function identificarCarpeta(nombre) {
 function guardarRegistro(datos) {
 
   var libro = SpreadsheetApp.getActiveSpreadsheet()
-  //var libro = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheets/d/12LrC9dBdPOiygeTfR8gjznR0yGJQFj47JCi0r1hCHzs/edit#gid=0")
+  //var libro = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheets/d/--/edit#gid=0")
   var ss = libro.getSheetByName("datos");
 
   datos.estado = "Pendiente"
